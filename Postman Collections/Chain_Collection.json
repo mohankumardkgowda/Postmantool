@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "4a83bb71-7232-4c16-a4e7-d402c28aebb7",
+		"name": "Chain Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "new",
+			"item": [
+				{
+					"name": "getu1",
+					"id": "0dc057f1-cc4a-44d6-b84c-8bd05019ee65",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "https://0ea83756-9190-4542-81c9-f96511f347bf.mock.pstmn.io",
+					"id": "a7ed96cf-5824-4cac-8672-5b6b838cf957",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{abc:\"xyz}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": "https://0ea83756-9190-4542-81c9-f96511f347bf.mock.pstmn.io"
+					},
+					"response": []
+				}
+			],
+			"id": "b126c775-ff48-4e55-a746-0a4b219d9a66"
+		},
+		{
+			"name": "create",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "88f37e83-0c30-4b09-ad5a-bcc02e013a07",
+						"exec": [
+							"var random = Math.random().toString(36).substring(3);\r",
+							"pm.environment.get(\"variable_key\");\r",
+							"\r",
+							"var mail=random+\"@gmail.com\";\r",
+							"\r",
+							"pm.globals.set(\"email\",mail);\r",
+							"pm.globals.set(\"name\",random);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "30350d95-f3cf-4ce1-88b7-d1bb48da098d",
+						"exec": [
+							"var jsonData=JSON.parse(responseBody);\r",
+							"\r",
+							"pm.globals.set(\"id\",jsonData.id);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "49152974-7263-4dfb-871f-30dd3b97ab04",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"gender\": \"male\",\r\n    \"email\": \"{{email}}\",\r\n    \"status\":\"active\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"",
+						"public",
+						"v2",
+						"users"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getu",
+			"id": "91b8beb4-7862-44b2-8e69-49602c56cce0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://gorest.co.in//public/v2/users/{{id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"id": "5bdbd337-0c55-4771-8cb6-8e20f872f32b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"gender\": \"male\",\r\n    \"email\": \"{{email}}\",\r\n    \"status\":\"inactive\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://gorest.co.in//public/v2/users/{{id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "del",
+			"id": "2dd9a028-979d-498f-9fe5-3e4b5c6942df",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "https://gorest.co.in//public/v2/users/{{id}}"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "d7363a6c7e5e12ac255fed68617ea26d121c96ea7a93d4adf11f302cf80bc5b8"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f7b11b22-4975-4178-8776-569574a7c8ff",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0fe6dae6-7b25-466e-bb29-7d3ee624c3eb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
